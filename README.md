@@ -14,3 +14,5 @@ El código no se ha desarrollado ni con el objetivo de causar daño alguno, ni e
 
 El usuario es el único responsable de darle un buen uso.
 
+Si tienes cualquier duda, comentario o sugerencia, puedes contactar conmigo en Twitter: **@310hkc41b**
+
