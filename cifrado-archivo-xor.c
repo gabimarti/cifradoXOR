@@ -16,31 +16,38 @@
 void ayuda(char *programa, char *msg);
 int cifrado_xor(char *archivo_origen, char *clave, char *archivo_destino);
 
+// Cifrado y descifrado XOR de un archivo
+// Si la operación tiene exito devuelve 1, en caso contrario devuelve 0
 int cifrado_xor(char *archivo_origen, char *clave, char *archivo_destino) {
 	FILE *forigen, *fdestino;
 	int contador = 0;
 	char byte;
 	int long_clave = strlen(clave);
 	
+	// Abre archivo origen, si no lo puede abrir, muestra mensaje de error 
+	// y sale devolviendo 0
 	if ((forigen=fopen(archivo_origen, "rb")) == NULL) {
 		printf("No puedo abrir el archivo origen %s\n", archivo_origen);
 		return 0;
 	} 
 	
+	// Abre archivo destino para escritura
 	if ((fdestino=fopen(archivo_destino, "wb")) == NULL) {
 		printf("No puedo abrir el archivo destino %s\n", archivo_destino);
 		return 0;
 	}  
 	
+	// Recorre archivo origen y va cifrando bytes uno a uno y grabando en destino
 	contador = 0;
 	while(fread(&byte, sizeof(byte), 1, forigen) == 1) {
-		byte = byte ^ clave[contador % long_clave];				
+		byte = byte ^ clave[contador % long_clave];				// Cifra con XOR
 		if (!fwrite(&byte, sizeof(byte), 1, fdestino)) {
 			printf("Error escribiendo el byte %d\n", contador);	
 		}	
 		contador++;
 	} 
 	
+	// Cierra archivos
 	if (fclose(fdestino)) {
 		printf("Error cerrando archivo destino %s\n", archivo_destino);
 	}	
@@ -52,6 +59,7 @@ int cifrado_xor(char *archivo_origen, char *clave, char *archivo_destino) {
 	return 1;
 }
 
+// Ayuda
 void ayuda(char *programa, char *msg) {
 	printf("\nPrograma que cifra el contenido de un archivo.\n"); 
 	printf("\n");
@@ -61,6 +69,7 @@ void ayuda(char *programa, char *msg) {
 	return;
 }
 
+// Función principal 
 int main(int argc, char *argv[]) {
 	if (argc < 2) {
 		ayuda(argv[0], "No se ha pasado el nombre de archivo a cifrar.");
@@ -84,3 +93,8 @@ int main(int argc, char *argv[]) {
 
  	return 0;
 }
+
+
+
+
+
