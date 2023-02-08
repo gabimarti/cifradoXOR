@@ -7,6 +7,9 @@
 *.obj
 *.elf
 
+# Other document files
+*.ods
+
 # Linker output
 *.ilk
 *.map
